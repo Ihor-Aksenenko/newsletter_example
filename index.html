@@ -29,6 +29,7 @@
             align-items: center;
             font-family: Arial, sans-serif;
             margin-top: 30px;
+            margin-bottom: 20px;
             font-size: 18px;
         }
 
@@ -42,6 +43,33 @@
             border-radius: 4px;
             margin: 0 8px;
         }
+
+        .color-block {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+        }
+
+        .color-square {
+            width: 30px;
+            height: 30px;
+            margin: 5px;
+            cursor: pointer;
+            border: 1px solid gray;
+            transition: border-width 0.2s;
+        }
+
+        .color-square.selected {
+            border-width: 2px;
+            border-color: red;
+        }
+
+        .color-1 { background-color: #ffffff; }
+        .color-2 { background-color: #cfe7b4; }
+        .color-3 { background-color: #d0e6f4; }
+        .color-4 { background-color: #ffd700; }
+        .color-5 { background-color: #ffcccb; }
    </style>
    </head>
 </head>
@@ -62,11 +90,21 @@
                   <div class="header__audio-player">
                         <iframe src="https://drive.google.com/file/d/1lj7Idcup9oU__lOj69ltPoajeGkPhgbo/preview" height="63"
                            allow="autoplay"></iframe>
+
                            <div class="counter-container">
                               <span>Изменить размер шрифта:</span>
                               <button class="counter-button" onclick="changeText(-1)">-</button>
                               <p class="text">18</p>
                               <button class="counter-button" onclick="changeText(1)">+</button>
+                           </div>
+
+                           <div class="color-block">
+                              <span>Изменить цвет фона:</span>
+                              <div class="color-square color-1 selected" onclick="changeColor(this)"></div>
+                              <div class="color-square color-2" onclick="changeColor(this)"></div>
+                              <div class="color-square color-3" onclick="changeColor(this)"></div>
+                              <div class="color-square color-4" onclick="changeColor(this)"></div>
+                              <div class="color-square color-5" onclick="changeColor(this)"></div>
                            </div>
                   </div>
                </div>
@@ -156,6 +194,17 @@
          text.innerText = currentFontSizeLimited;
       });
    }
+
+   function changeColor(element) {
+         const selectedSquare = document.querySelector('.color-square.selected');
+         if (selectedSquare) {
+            selectedSquare.classList.remove('selected');
+         }
+         element.classList.add('selected');
+
+         const color = window.getComputedStyle(element).backgroundColor;
+         document.body.style.backgroundColor = color;
+      }
 </script>
 
 </body>
