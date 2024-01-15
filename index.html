@@ -22,6 +22,26 @@
          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
          z-index: 9999;
       }
+
+      .counter-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            margin-top: 30px;
+            font-size: 18px;
+        }
+
+      .counter-button {
+            cursor: pointer;
+            padding: 8px;
+            font-size: 16px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            margin: 0 8px;
+        }
    </style>
    </head>
 </head>
@@ -42,6 +62,12 @@
                   <div class="header__audio-player">
                         <iframe src="https://drive.google.com/file/d/1lj7Idcup9oU__lOj69ltPoajeGkPhgbo/preview" height="63"
                            allow="autoplay"></iframe>
+                           <div class="counter-container">
+                              <span>Изменить размер шрифта:</span>
+                              <button class="counter-button" onclick="changeText(-1)">-</button>
+                              <p class="text">18</p>
+                              <button class="counter-button" onclick="changeText(1)">+</button>
+                           </div>
                   </div>
                </div>
             </div>
@@ -115,6 +141,22 @@
 	bibleRef.conf("RSeparator", ",");
 	bibleRef.conf("CSeparator", ";");
 }if(w.addEventListener){w.addEventListener("load",function(){init()},false);}else{w.attachEvent("onload",function(){init()});}})(window);</script>
+
+<script>
+   function changeText(value) {
+      element = document.querySelectorAll('.page__text');
+
+      element.forEach(function (item) {
+         var style = window.getComputedStyle(item, null).getPropertyValue('font-size');
+         var currentFontSize = parseFloat(style) + value;
+         var currentFontSizeLimited = Math.max(10, Math.min(currentFontSize, 40));
+         item.style.fontSize = currentFontSizeLimited + 'px';
+
+         var text = document.querySelector('.text');
+         text.innerText = currentFontSizeLimited;
+      });
+   }
+</script>
 
 </body>
 
